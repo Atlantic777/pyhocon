@@ -794,8 +794,8 @@ class ListParser(TokenConverter):
         # relativedelta.__eq__() raises NotImplemented if it is compared with
         # a different object type so Python falls back to identity comparison.
         # We cannot compare this object to a string object.
-        for token in token_list:
-            if isinstance(token, str) and token == '':
+        for pos, token in enumerate(token_list):
+            if isinstance(token, str) and token == '' and pos + 1 == len(token_list):
                 # This is the case when there was a trailing comma in the list.
                 # The last token is just an empty string so we can safely ignore
                 # it.
